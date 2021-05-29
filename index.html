@@ -14,8 +14,9 @@
 					var point = new Point(view.size.width, view.size.height);
 					var rectangle = new Rectangle(new Point(0, 0), point);
 					var path = new Path.Rectangle(rectangle);
-					path.fillColor = 'grey';
+					path.fillColor = keyData[event.key].color;
 					path.count = 0;
+					path.color = path.fillColor;
 					flicker.push(path);
 				}
 			},
@@ -133,10 +134,13 @@
 				}),
 				color: '#f1c40f',
 				animate: function(){
-					var point = new Point(view.size.width * Math.random(), view.size.height * Math.random());
-					var my = new Path.Circle(point, 300);
-					my.fillColor = keyData[event.key].color;	
-					circles.push(my);
+					var point = new Point(view.size.width, view.size.height);
+					var rectangle = new Rectangle(new Point(0, 0), point);
+					var path = new Path.Rectangle(rectangle);
+					path.fillColor = keyData[event.key].color;
+					path.count = 0;
+					path.color = path.fillColor
+					flicker.push(path);
 				}			
 			},
 			s: {
@@ -241,10 +245,13 @@
 				}),
 				color: '#9b59b6',
 				animate: function(){
-					var point = new Point(view.size.width * Math.random(), view.size.height * Math.random());
-					var my = new Path.Circle(point, 300);
-					my.fillColor = keyData[event.key].color;	
-					circles.push(my);
+					var point = new Point(view.size.width, view.size.height);
+					var rectangle = new Rectangle(new Point(0, 0), point);
+					var path = new Path.Rectangle(rectangle);
+					path.fillColor = keyData[event.key].color;
+					path.count = 0;
+					path.color = path.fillColor;
+					flicker.push(path);
 				}
 			},
 			x: {
@@ -346,9 +353,12 @@
 			for(var i=0; i<flicker.length; i++)
 			{
 				if(flicker[i].count/3%2)
+				{
 					flicker[i].fillColor = "black";
+				}
+
 				else
-					flicker[i].fillColor = "grey";
+					flicker[i].fillColor = flicker[i].color;
 				flicker[i].count++;
 				if(flicker[i].count > 18)
 				{
