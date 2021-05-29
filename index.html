@@ -11,10 +11,12 @@
 				}),
 				color: '#1abc9c',
 				animate: function(){
-					var point = new Point(view.size.width * Math.random(), view.size.height * Math.random());
-					var my = new Path.Circle(point, 300);
-					my.fillColor = keyData[event.key].color;	
-					circles.push(my);
+					var point = new Point(view.size.width, view.size.height);
+					var rectangle = new Rectangle(new Point(0, 0), point);
+					var path = new Path.Rectangle(rectangle);
+					path.fillColor = 'grey';
+					path.count = 0;
+					flicker.push(path);
 				}
 			},
 			w: {
@@ -320,6 +322,7 @@
 		}
 
 		var circles = [];
+		var flicker = [];
 
 		function onKeyDown(event){
 			if(keyData[event.key])
@@ -339,6 +342,19 @@
       				circles[i].remove(); 
       				circles.splice(i, 1);
       			}
+			}
+			for(var i=0; i<flicker.length; i++)
+			{
+				if(flicker[i].count/3%2)
+					flicker[i].fillColor = "black";
+				else
+					flicker[i].fillColor = "grey";
+				flicker[i].count++;
+				if(flicker[i].count > 18)
+				{
+					flicker[i].remove();
+					flicker.splice(i,1);
+				}
 			}
 		}
 	</script>
